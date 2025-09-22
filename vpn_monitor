@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+import subprocess
+
+def check_wireguard():
+    try:
+        # Run wg to get WireGuard status
+        result = subprocess.run(['sudo', 'wg'], capture_output=True, text=True)
+        output = result.stdout.strip()
+
+        # Print raw output
+        print(output)
+
+        # Determine if WireGuard is active
+        if output:
+            print("\n✅ WireGuard is active!")
+        else:
+            print("\n❌ WireGuard is inactive!")
+    except Exception as e:
+        print(f"\nError checking WireGuard: {e}")
+        print("❌ WireGuard is inactive!")
+
+if __name__ == "__main__":
+    print("WireGuard Status:")
+    check_wireguard()
+
